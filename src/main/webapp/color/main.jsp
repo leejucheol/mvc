@@ -1,15 +1,10 @@
 <%@page import="com.hexagon.mvc.model.ColorManager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%! 
-	ColorManager colorManager = new ColorManager();
-%>
 <%
-	// 클라이언트가 전송한 색상 파라미터 받기
-	String color = request.getParameter("color");
-	if(color==null)color=""; // 최초에는 전송된 파라미터가 없으므로, 디폴트값을 강제로 부여
-
-	// 별도로 분리 시켜놓은 로직이 model 객체를 이용해보자
-	String msg = colorManager.getAdvice(color);
+	// 지금부터는 MVC로 철철히 나누어서 개발해야 하는 모델2로 구현해야 하지만
+	// View(디자인)만을 담당해야 하는 jsp에 코드에 Controller로의 코드가 섞여 있으므로
+	// 디자인을 버리고 다른 디자인 소스로 대체할 경우 , Controller가 함께 날아가 버림
+	// 즉 완전히 분리시키지 못한 상태 == 모델 1 방식의 개발이라함
 
 %>
 <!DOCTYPE html>
@@ -33,8 +28,8 @@
 <script type="text/javascript">
 	function getResult() {
 		$("#form1").attr({
-			action:"/color/main.jsp",
-			method:"POST"; // text만 전송
+			action:"/color",
+			method:"POST" // text만 전송
 		});
 		
 		$("#form1").submit(); //여기서 전송
@@ -54,10 +49,10 @@
 			<div class="form-group">
 				<select class="form-control" name="color">
 					<option>Chose the color you want</option>
-					<option value="red"<%if(color.equals("red")){%> selected<%}%>>red</option>
-					<option value="blue"<%if(color.equals("blue")){%> selected<%}%>>blue</option>
-					<option value="black"<%if(color.equals("black")){%> selected<%}%>>black</option>
-					<option value="white"<%if(color.equals("white")){%> selected<%}%>>white</option>
+					<option value="red">red</option>
+					<option value="blue">blue</option>
+					<option value="black">black</option>
+					<option value="white">white</option>
 				</select>
 			</div>
 			<button class="btn btn-info" id="bt">Result</button>
@@ -65,7 +60,8 @@
 
 		<h3>
 			Result : <br> 
-			<%= msg%>
+			<!-- 개발자가 서버를 중지한 적이 없다면 msg는 언제나 꺼내쓸 수 있음 -->
+			<%=request.getAttribute("msg")%>
 		</h3>
 	</div>
 

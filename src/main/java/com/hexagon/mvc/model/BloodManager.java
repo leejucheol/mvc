@@ -8,7 +8,7 @@ public class BloodManager {
 		switch(bloodType){
 		case "A": msg="Introvert"; break;
 		case "B": msg="Free Soul"; break;
-		case "O": msg="So kind and scik"; break;
+		case "O": msg="So kind and sick"; break;
 		case "AB": msg="Psyco"; break;
 		default: msg="You have not choose yet now"; 
 		}
@@ -20,6 +20,7 @@ public class BloodManager {
 //		}
 		
 		return msg;
+		
 		
 	}
 
