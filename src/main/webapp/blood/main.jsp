@@ -1,4 +1,6 @@
+<%@page import="com.hexagon.mvc.model.BloodManager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%! BloodManager bloodManager = new BloodManager(); %>
 <%
 	// 클라이언트가 전송한 색상 파라미터 받기
 	String bloodType = request.getParameter("bloodType");
@@ -9,20 +11,7 @@
 	}
 	//out.print("The color user send: " + color);
 	
-	String msg=null;
-	
-	switch(bloodType){
-	case "A": msg="Let just do it"; break;
-	case "B": msg="Sick"; break;
-	case "O": msg="Quietly"; break;
-	case "AB": msg="Peace"; break;
-	default: msg="You have not choose yet now"; 
-	}
-	switch(type){
-	case "Common": msg="Common"; break;
-	case "Unique": msg="Unique"; break;
-	default: msg="You have not choose yet now"; 
-	}
+	String msg = bloodManager.getAdvice(bloodType);
 %>
 <!DOCTYPE html>
 <html>

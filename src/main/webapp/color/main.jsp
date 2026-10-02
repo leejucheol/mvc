@@ -1,20 +1,16 @@
+<%@page import="com.hexagon.mvc.model.ColorManager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%! 
+	ColorManager colorManager = new ColorManager();
+%>
 <%
 	// 클라이언트가 전송한 색상 파라미터 받기
 	String color = request.getParameter("color");
 	if(color==null)color=""; // 최초에는 전송된 파라미터가 없으므로, 디폴트값을 강제로 부여
-	
-	//out.print("The color user send: " + color);
-	
-	String msg=null;
-	
-	switch(color){
-	case "red": msg="Let just do it"; break;
-	case "blue": msg="Sick"; break;
-	case "black": msg="Quietly"; break;
-	case "white": msg="Peace"; break;
-	default: msg="You have not choose yet now"; 
-	}
+
+	// 별도로 분리 시켜놓은 로직이 model 객체를 이용해보자
+	String msg = colorManager.getAdvice(color);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -37,7 +33,7 @@
 <script type="text/javascript">
 	function getResult() {
 		$("#form1").attr({
-			action:"/color/main.jsp"
+			action:"/color/main.jsp",
 			method:"POST"; // text만 전송
 		});
 		
